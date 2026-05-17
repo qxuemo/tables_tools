@@ -1,0 +1,81 @@
+{
+  "scanned_at": "2026-05-17T10:00:00",
+  "strategy": "sample",
+  "tables": [
+    {
+      "name": "user_info",
+      "row_count": 150000,
+      "columns": [
+        {"name": "id", "type": "INT", "comment": "主键ID"},
+        {"name": "user_id", "type": "VARCHAR", "comment": "用户唯一标识"},
+        {"name": "user_name", "type": "VARCHAR", "comment": "用户名称"},
+        {"name": "dept_id", "type": "INT", "comment": "部门ID"},
+        {"name": "create_time", "type": "DATETIME", "comment": "创建时间"}
+      ]
+    },
+    {
+      "name": "order_main",
+      "row_count": 89241,
+      "columns": [
+        {"name": "id", "type": "INT", "comment": "主键"},
+        {"name": "order_id", "type": "VARCHAR", "comment": "订单编号"},
+        {"name": "user_id", "type": "VARCHAR", "comment": "用户ID"},
+        {"name": "amount", "type": "DECIMAL", "comment": "订单金额"},
+        {"name": "status", "type": "VARCHAR", "comment": "订单状态"},
+        {"name": "create_time", "type": "DATETIME", "comment": "创建时间"}
+      ]
+    },
+    {
+      "name": "order_detail",
+      "row_count": 1200000,
+      "columns": [
+        {"name": "id", "type": "INT", "comment": "主键"},
+        {"name": "order_id", "type": "VARCHAR", "comment": "订单编号"},
+        {"name": "product_id", "type": "VARCHAR", "comment": "产品ID"},
+        {"name": "quantity", "type": "INT", "comment": "数量"},
+        {"name": "price", "type": "DECIMAL", "comment": null}
+      ]
+    },
+    {
+      "name": "sys_log",
+      "row_count": 3500000,
+      "columns": [
+        {"name": "id", "type": "BIGINT", "comment": "日志ID"},
+        {"name": "op_user_id", "type": "VARCHAR", "comment": "操作用户ID"},
+        {"name": "op_type", "type": "VARCHAR", "comment": "操作类型"},
+        {"name": "op_time", "type": "DATETIME", "comment": "操作时间"},
+        {"name": "detail", "type": "TEXT", "comment": null}
+      ]
+    },
+    {
+      "name": "payment_rec",
+      "row_count": 67000,
+      "columns": [
+        {"name": "id", "type": "INT", "comment": null},
+        {"name": "order_id", "type": "VARCHAR", "comment": "关联订单"},
+        {"name": "user_id", "type": "VARCHAR", "comment": "付款用户"},
+        {"name": "pay_amount", "type": "DECIMAL", "comment": "支付金额"},
+        {"name": "pay_time", "type": "DATETIME", "comment": "支付时间"}
+      ]
+    },
+    {
+      "name": "dept_info",
+      "row_count": 120,
+      "columns": [
+        {"name": "id", "type": "INT", "comment": "部门ID"},
+        {"name": "dept_name", "type": "VARCHAR", "comment": "部门名称"},
+        {"name": "parent_id", "type": "INT", "comment": "上级部门"}
+      ]
+    },
+    {
+      "name": "order_log_20260517",
+      "row_count": 5600,
+      "columns": [
+        {"name": "id", "type": "BIGINT", "comment": null},
+        {"name": "order_id", "type": "VARCHAR", "comment": "订单编号"},
+        {"name": "change_type", "type": "VARCHAR", "comment": "变更类型"},
+        {"name": "create_time", "type": "DATETIME", "comment": null}
+      ]
+    }
+  ]
+}

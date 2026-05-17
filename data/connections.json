@@ -1,0 +1,12 @@
+[
+  {
+    "id": "demo",
+    "name": "示例数据库",
+    "host": "localhost",
+    "port": 5236,
+    "user": "readonly",
+    "password": "",
+    "schema": "DEMO",
+    "last_scan": "2026-05-17T10:00:00"
+  }
+]

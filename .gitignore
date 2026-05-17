@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.superpowers/
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store

@@ -1,0 +1,23 @@
+{
+  "agent_command": "python scan.py",
+  "ws_port": 8765,
+  "default_strategy": "sample",
+  "sample_rows": 1000,
+  "overlap_threshold": 0.5,
+  "large_table_rules": [
+    {
+      "min_rows": 2000000,
+      "strategy": "recent",
+      "recent_days": 3
+    },
+    {
+      "min_rows": 500000,
+      "strategy": "sample",
+      "sample_pct": 60
+    }
+  ],
+  "exclude_tables": [
+    "tmp_*",
+    "bak_*"
+  ]
+}

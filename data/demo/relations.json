@@ -1,0 +1,83 @@
+[
+  {
+    "from_table": "user_info",
+    "from_column": "user_id",
+    "to_table": "order_main",
+    "to_column": "user_id",
+    "match_type": "exact_name",
+    "overlap_rate": 0.94,
+    "confidence": "high"
+  },
+  {
+    "from_table": "user_info",
+    "from_column": "user_id",
+    "to_table": "sys_log",
+    "to_column": "op_user_id",
+    "match_type": "keyword",
+    "overlap_rate": 0.67,
+    "confidence": "medium"
+  },
+  {
+    "from_table": "user_info",
+    "from_column": "user_id",
+    "to_table": "payment_rec",
+    "to_column": "user_id",
+    "match_type": "exact_name",
+    "overlap_rate": 0.52,
+    "confidence": "medium"
+  },
+  {
+    "from_table": "user_info",
+    "from_column": "dept_id",
+    "to_table": "dept_info",
+    "to_column": "id",
+    "match_type": "id_pattern",
+    "overlap_rate": 0.88,
+    "confidence": "high"
+  },
+  {
+    "from_table": "order_main",
+    "from_column": "order_id",
+    "to_table": "order_detail",
+    "to_column": "order_id",
+    "match_type": "exact_name",
+    "overlap_rate": 0.99,
+    "confidence": "high"
+  },
+  {
+    "from_table": "order_main",
+    "from_column": "order_id",
+    "to_table": "payment_rec",
+    "to_column": "order_id",
+    "match_type": "exact_name",
+    "overlap_rate": 0.91,
+    "confidence": "high"
+  },
+  {
+    "from_table": "order_main",
+    "from_column": "order_id",
+    "to_table": "order_log_20260517",
+    "to_column": "order_id",
+    "match_type": "exact_name",
+    "overlap_rate": 0.35,
+    "confidence": "low"
+  },
+  {
+    "from_table": "order_main",
+    "from_column": "user_id",
+    "to_table": "user_info",
+    "to_column": "user_id",
+    "match_type": "exact_name",
+    "overlap_rate": 0.94,
+    "confidence": "high"
+  },
+  {
+    "from_table": "dept_info",
+    "from_column": "id",
+    "to_table": "user_info",
+    "to_column": "dept_id",
+    "match_type": "id_pattern",
+    "overlap_rate": 0.76,
+    "confidence": "medium"
+  }
+]
