@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { inject, computed, ref } from "vue";
+import { inject, computed, ref, reactive } from "vue";
 import type { RelationInfo, TableSchema } from "@/types";
 
 const emit = defineEmits<{
@@ -11,7 +11,7 @@ const rel = inject<any>("relations")!;
 const selectedTable = inject<any>("selectedTable");
 
 const search = ref("");
-const expanded: Record<string, boolean> = {};
+const expanded = reactive<Record<string, boolean>>({});
 
 // 按 from_table 分组
 const grouped = computed(() => {

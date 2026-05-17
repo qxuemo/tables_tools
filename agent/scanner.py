@@ -32,14 +32,14 @@ class TableScanner:
         return result
 
     def _get_tables(self, exclude_patterns: List[str]) -> List[str]:
-        sql = "SELECT TABLE_NAME FROM ALL_TABLES WHERE OWNER = USER"
         if self.schema:
-            sql = (
-                "SELECT TABLE_NAME FROM ALL_TABLES WHERE OWNER = '"
-                + self.schema
-                + "'"
+            sql = "SELECT TABLE_NAME FROM ALL_TABLES WHERE OWNER = ?"
+            rows = self.conn.query(sql, (self.schema,))
+            tables = [r[0] for r in rows]
+        else:
+            rows = self.conn.query(
+                "SELECT TABLE_NAME FROM ALL_TABLES WHERE OWNER = USER"
             )
-        rows = self.conn.query(sql)
         tables = [r[0] for r in rows]
 
         # 通配符过滤

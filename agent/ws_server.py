@@ -43,13 +43,16 @@ class ProgressServer:
     async def broadcast(self, message: Dict[str, Any]) -> None:
         data = json.dumps(message)
         dead: list = []
-        for ws in self._clients:
+        for ws in list(self._clients):  # 拷贝列表避免迭代期间修改
             try:
                 await ws.send(data)
             except Exception:
                 dead.append(ws)
         for ws in dead:
-            self._clients.remove(ws)
+            try:
+                self._clients.remove(ws)
+            except ValueError:
+                pass  # 可能已被 handler 移除
 
     async def stop(self) -> None:
         if self._server:

@@ -55,7 +55,8 @@ watch(
     if (p.tablesTotal > 0) {
       progressPct.value = Math.round((p.tablesDone / p.tablesTotal) * 100);
     }
-  }
+  },
+  { deep: true }
 );
 
 const extensions = inject<{ extensions: { value: ExtensionInfo[] }; load: () => void }>("extensions")!;

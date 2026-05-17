@@ -72,7 +72,11 @@ def main() -> None:
     progress = ProgressServer(ws_port)
 
     async def run() -> None:
-        await progress.start()
+        try:
+            await progress.start()
+        except Exception as e:
+            logger.error("WebSocket 启动失败: %s (端口: %s)", e, ws_port)
+            sys.exit(1)
 
         try:
             start_time = time.time()

@@ -23,7 +23,11 @@ def analyze(
     if progress_cb:
         progress_cb("matching", 0, 0, 0)
 
-    candidates = match_all(tables, progress_cb=None)
+    def matching_progress(table_name: str, done: int, total: int) -> None:
+        if progress_cb:
+            progress_cb("matching", done, total, 0)
+
+    candidates = match_all(tables, progress_cb=matching_progress)
     total = len(candidates)
 
     if progress_cb:

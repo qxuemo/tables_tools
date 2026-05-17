@@ -115,10 +115,27 @@ watch(
 function handleStartScan() {
   if (!conn.selectedId.value) return;
   scan.startScan(conn.selectedId.value, undefined, wsPort.value);
-  // 等 agent 启动后连接 WS
+  // 带重试连接 WS，agent 启动需要时间
+  connectWsWithRetry(wsPort.value);
+}
+
+function connectWsWithRetry(port: number, attempt = 0) {
+  const delays = [1500, 3000, 5000, 8000];
+  if (attempt >= delays.length) {
+    scan.agentStatus.value = "error";
+    scan.error.value = "Agent 启动超时，请检查 Python 环境和连接配置";
+    scan.scanning.value = false;
+    return;
+  }
   setTimeout(() => {
-    ws.connect(wsPort.value);
-  }, 1500);
+    ws.connect(port);
+    // 等 500ms 检查是否连上
+    setTimeout(() => {
+      if (ws.status.value === "disconnected" && scan.scanning.value) {
+        connectWsWithRetry(port, attempt + 1);
+      }
+    }, 500);
+  }, delays[attempt]);
 }
 
 function handleStopScan() {

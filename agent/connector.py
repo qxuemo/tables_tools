@@ -32,6 +32,9 @@ class DamengConnector:
         )
         self._cursor = self._conn.cursor()
         if self.schema:
+            # 校验 schema 名只含安全字符
+            if not self.schema.replace("_", "").isalnum():
+                raise ValueError(f"不安全的 schema 名: {self.schema}")
             self._cursor.execute(
                 f'SET SCHEMA "{self.schema}"'
             )

@@ -174,24 +174,40 @@ function initGraph() {
   graph.render();
 }
 
+function rebuildGraph() {
+  if (!graph || !container.value) return;
+  const data = buildGraphData(rel.relations.value as RelationInfo[]);
+  graph.setData(data);
+  graph.render();
+}
+
+// Watch for async data loading
+watch(
+  () => rel.relations.value,
+  () => rebuildGraph(),
+  { deep: true }
+);
+
+onUnmounted(() => {
+  graph?.destroy();
+  graph = null;
+});
+
 function highlightNodeEdges(nodeId: string) {
   if (!graph) return;
-  const nodeData = graph.getNodeData(nodeId);
-  if (!nodeData) return;
-
   // Dim all edges
   const allEdges = graph.getEdgeData();
   for (const e of allEdges) {
-    graph.setElementState({ [e.id]: "dimmed" }, "edge");
+    graph.setElementState({ [e.id]: "dimmed" });
   }
 
   // Highlight connected edges
   const connectedEdges = graph.getRelatedEdgesData(nodeId);
   for (const e of connectedEdges) {
-    graph.setElementState({ [e.id]: "highlighted" }, "edge");
+    graph.setElementState({ [e.id]: "highlighted" });
   }
 
-  graph.setElementState({ [nodeId]: "highlighted" }, "node");
+  graph.setElementState({ [nodeId]: "highlighted" });
 }
 </script>
 

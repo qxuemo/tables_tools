@@ -6,27 +6,45 @@ const props = defineProps<{
   error?: string;
 }>();
 
-const statusConfig: Record<
-  AgentStatusType,
-  { color: string; label: string; animated: boolean }
-> = {
-  offline: { color: "#bfbfbf", label: "Agent 离线", animated: false },
-  starting: { color: "#faad14", label: "启动中...", animated: true },
-  scanning: { color: "#1890ff", label: "扫描中", animated: true },
-  analyzing: { color: "#1890ff", label: "分析中", animated: true },
-  done: { color: "#52c41a", label: "完成", animated: false },
-  error: { color: "#ff4d4f", label: props.error || "错误", animated: false },
-};
+import { computed } from "vue";
+
+const statusLabel = computed(() => {
+  if (props.status === "error") return props.error || "错误";
+  const labels: Record<string, string> = {
+    offline: "Agent 离线",
+    starting: "启动中...",
+    scanning: "扫描中",
+    analyzing: "分析中",
+    done: "完成",
+  };
+  return labels[props.status] || props.status;
+});
+
+const statusColor = computed(() => {
+  const colors: Record<string, string> = {
+    offline: "#bfbfbf",
+    starting: "#faad14",
+    scanning: "#1890ff",
+    analyzing: "#1890ff",
+    done: "#52c41a",
+    error: "#ff4d4f",
+  };
+  return colors[props.status] || "#bfbfbf";
+});
+
+const isAnimated = computed(() =>
+  ["starting", "scanning", "analyzing"].includes(props.status)
+);
 </script>
 
 <template>
-  <div class="agent-status" :title="statusConfig[status].label">
+  <div class="agent-status" :title="statusLabel">
     <span
       class="status-dot"
-      :class="{ animated: statusConfig[status].animated }"
-      :style="{ background: statusConfig[status].color }"
+      :class="{ animated: isAnimated }"
+      :style="{ background: statusColor }"
     ></span>
-    <span class="status-text">{{ statusConfig[status].label }}</span>
+    <span class="status-text">{{ statusLabel }}</span>
   </div>
 </template>
 
